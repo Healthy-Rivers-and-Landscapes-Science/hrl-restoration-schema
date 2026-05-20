@@ -32,10 +32,10 @@
   position: sticky;
   top: 0;
   z-index: 3;  /* below MkDocs Material nav bar (z-index: 4) */
-  padding: 0.5rem 0.6rem;
-  font-size: 0.65rem;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.55rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--md-default-fg-color--light);
   background: var(--md-default-bg-color);

@@ -95,6 +95,7 @@ def render_data_dictionary(view: SchemaView, schema_path: Path) -> str:
 
 def render_slot_table(view: SchemaView, slots: Iterable[SlotDefinition]) -> str:
     rows = [
+        '<div class="data-dictionary-table-wrapper">',
         '<table class="data-dictionary-table">',
         "<colgroup>",
         '<col class="data-dictionary-table__field">',
@@ -129,7 +130,7 @@ def render_slot_table(view: SchemaView, slots: Iterable[SlotDefinition]) -> str:
                 "</tr>",
             ]
         )
-    rows.extend(["</tbody>", "</table>"])
+    rows.extend(["</tbody>", "</table>", "</div>"])
     return "\n".join(rows)
 
 
@@ -170,9 +171,7 @@ def multiple_values(slot: SlotDefinition) -> str:
 def rule_parts(slot: SlotDefinition) -> list[str]:
     parts: list[str] = []
 
-    max_length = annotation_value(slot, "max_length")
-    if max_length:
-        parts.append(f"Maximum length: {max_length} characters")
+    # max_length is omitted here — slot.comments always describes it in prose already
 
     minimum = getattr(slot, "minimum_value", None)
     maximum = getattr(slot, "maximum_value", None)
@@ -310,9 +309,13 @@ def field_guidance_anchor(slot: SlotDefinition) -> str:
 def html_list(items: list[str]) -> str:
     if not items:
         return ""
-    if len(items) == 1:
-        return html_cell(items[0])
-    return "<ul>" + "".join(f"<li>{html_cell(item)}</li>" for item in items) + "</ul>"
+    parts = []
+    for item in items:
+        rendered = html_cell(item)
+        if rendered and rendered[-1] not in ".!?":
+            rendered += "."
+        parts.append(rendered)
+    return " ".join(parts)
 
 
 if __name__ == "__main__":
