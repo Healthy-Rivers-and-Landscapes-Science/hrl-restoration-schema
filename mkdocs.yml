@@ -1,0 +1,15 @@
+site_name: HRL Restoration Schema
+site_url: https://lucy-dwr.github.io/hrl-restoration-schema/
+repo_url: https://github.com/lucy-dwr/hrl-restoration-schema
+
+nav:
+  - Home: index.md
+  - Schema overview: schema_overview.md
+  - Submission guidance: submission_guidance.md
+  - Geometry policy: geometry_policy.md
+  - Business rules: business_rules.md
+  - Validation interface: validation_interface.md
+  - Schema reference: reference/index.md
+
+theme:
+  name: material

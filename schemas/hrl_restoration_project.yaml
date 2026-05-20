@@ -7,14 +7,10 @@
 # what data type each field uses, and which controlled vocabulary values are
 # allowed.
 
-# `id` should eventually be updated to a permanent link, perhaps hosted at
-# https://w3id.org
 id: https://lucy-dwr.github.io/hrl-restoration-schema/
 name: hrl_restoration_schema
 title: HRL Restoration Spatial Data Schema
-description: >-
-  Machine-readable schema for Healthy Rivers and Landscapes restoration spatial
-  data submissions and standardized canonical restoration project records.
+description: Schema for HRL restoration spatial data submissions.
 
 license: https://creativecommons.org/publicdomain/zero/1.0/
 
@@ -23,7 +19,6 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 # full URL everywhere.
 prefixes:
   linkml: https://w3id.org/linkml/
-  # The HRL prefix should eventually be updated in parallel with `id` above
   hrl: https://lucy-dwr.github.io/hrl-restoration-schema/
 
 default_prefix: hrl
@@ -134,8 +129,6 @@ classes:
       target_species:
         required: true
       geometry:
-        # This may be dropped, with geometry inclusion validated through a
-        # separate process---TBD.
         required: true
 
   # This class inherits the shared project fields from RestorationProjectRecord
@@ -433,6 +426,10 @@ slots:
         Data may be submitted in common California projected coordinate systems
         or WGS84 latitude/longitude, but all geometries will be transformed to
         NAD83 / California Albers, EPSG:3310.
+      - >-
+        Geometry validity, CRS checks, extent checks, sliver checks, duplicate
+        geometry checks, and project-type-specific geometry rules are
+        responsibilities of validation code.
     annotations:
       geometry_required: "true"
       allowable_geometry_types: "POLYGON; MULTIPOLYGON; POINT; MULTIPOINT"
