@@ -12,6 +12,8 @@ that LinkML schema rather than edited directly.
 
 To view the schema docs site, visit https://lucy-dwr.github.io/hrl-restoration-schema/.
 
+To see the GitHub repository that hosts the schema, visit https://github.com/lucy-dwr/hrl-restoration-schema.
+
 ## What this repository contains
 
 - LinkML schema for HRL restoration spatial data submissions with inline

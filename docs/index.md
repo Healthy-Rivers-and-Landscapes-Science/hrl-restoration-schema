@@ -10,5 +10,5 @@ spatial data submissions.
 - [Validation interface](validation_interface.md)
 - [Schema reference](reference/index.md)
 
-The schema reference is generated from the LinkML source during the
-documentation build.
+The schema reference is generated from the [LinkML](https://linkml.io) source
+during the documentation build.

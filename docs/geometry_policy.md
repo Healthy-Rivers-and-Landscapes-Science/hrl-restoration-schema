@@ -8,11 +8,11 @@ and fish screen installation or improvement project types may be represented as
 points or multipoints, if that remains consistent with the schema.
 
 Actual geometry checks will be performed by validation code using geospatial
-libraries, not solely by LinkML. Validation code should check:
+libraries, not solely by [LinkML](https://linkml.io). Validation code should check:
 
 - CRS is present
 - CRS can be transformed to the target CRS
-- Target CRS for standardization is EPSG:3310, unless the schema says
+- Target CRS for standardization is [EPSG:3310](https://epsg.io/3310), unless the schema says
   otherwise
 - Geometries are non-empty
 - Geometries are valid
