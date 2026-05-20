@@ -146,9 +146,7 @@ def expected_value(view: SchemaView, slot: SlotDefinition) -> str:
         values = list(enum.permissible_values.keys())
         if len(values) <= 10:
             return html_cell("<br>".join(code(value) for value in values))
-        return html_cell(
-            f'Controlled vocabulary: <a href="#{anchor(slot.range)}">{slot.range}</a>'
-        )
+        return f'Controlled vocabulary: <a href="#{anchor(slot.range)}">{html.escape(slot.range, quote=False)}</a>'
 
     type_labels = {
         "boolean": "Yes/no",
@@ -284,12 +282,21 @@ def annotation_value(element: object, name: str) -> str | None:
 
 def html_cell(value: str) -> str:
     escaped = html.escape(str(value), quote=False)
-    return escaped.replace("&lt;br&gt;", "<br>").replace("\n", " ").replace("|", "\\|")
+    return (
+        escaped.replace("&lt;br&gt;", "<br>")
+        .replace("&lt;code&gt;", "<code>")
+        .replace("&lt;/code&gt;", "</code>")
+        .replace("&lt;a ", "<a ")
+        .replace("&lt;/a&gt;", "</a>")
+        .replace("&gt;", ">")
+        .replace("\n", " ")
+        .replace("|", "\\|")
+    )
 
 
 def code(value: str) -> str:
     escaped = html.escape(str(value), quote=False).replace("|", "\\|")
-    return f"`{escaped}`"
+    return f"<code>{escaped}</code>"
 
 
 def anchor(value: str) -> str:
