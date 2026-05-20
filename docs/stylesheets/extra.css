@@ -31,13 +31,12 @@
 .md-typeset .data-dictionary-table thead th {
   position: sticky;
   top: 0;
-  z-index: 5;
-  padding: 0.7rem 0.75rem;
-  font-size: 0.68rem;
+  z-index: 3;  /* below MkDocs Material nav bar (z-index: 4) */
+  padding: 0.5rem 0.6rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  white-space: nowrap;
   color: var(--md-default-fg-color--light);
   background: var(--md-default-bg-color);
   border-bottom: 2px solid var(--md-default-fg-color--light);
@@ -45,7 +44,8 @@
 
 /* Body cells */
 .md-typeset .data-dictionary-table td {
-  padding: 0.6rem 0.75rem;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.7rem;
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 
