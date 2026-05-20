@@ -15,5 +15,9 @@ nav:
 theme:
   name: material
 
+markdown_extensions:
+  - md_in_html
+  - tables
+
 extra_css:
   - stylesheets/extra.css
