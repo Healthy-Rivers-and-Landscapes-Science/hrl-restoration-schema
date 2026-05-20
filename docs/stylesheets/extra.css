@@ -45,7 +45,7 @@
 /* Body cells */
 .md-typeset .data-dictionary-table td {
   padding: 0.5rem 0.6rem;
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 
