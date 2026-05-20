@@ -75,11 +75,15 @@ def render_data_dictionary(view: SchemaView, schema_path: Path) -> str:
         "",
         render_slot_table(view, submission_slots),
         "",
+        render_additional_guidance(submission_slots),
+        "",
         "## Canonical Record Differences",
         "",
         "These fields or requirements apply after validation and ingestion into the standardized canonical record.",
         "",
         render_slot_table(view, canonical_changes),
+        "",
+        render_additional_guidance(canonical_changes),
         "",
         "## Controlled Vocabularies",
         "",
@@ -91,25 +95,41 @@ def render_data_dictionary(view: SchemaView, schema_path: Path) -> str:
 
 def render_slot_table(view: SchemaView, slots: Iterable[SlotDefinition]) -> str:
     rows = [
-        "| Field | Required? | What it means | Expected value | Multiple values? | Rules | Notes |",
-        "|---|---:|---|---|---:|---|---|",
+        '<table class="data-dictionary-table">',
+        "<colgroup>",
+        '<col class="data-dictionary-table__field">',
+        '<col class="data-dictionary-table__required">',
+        '<col class="data-dictionary-table__meaning">',
+        '<col class="data-dictionary-table__expected">',
+        '<col class="data-dictionary-table__multiple">',
+        '<col class="data-dictionary-table__guidance">',
+        "</colgroup>",
+        "<thead>",
+        "<tr>",
+        "<th>Field</th>",
+        "<th>Required?</th>",
+        "<th>What it means</th>",
+        "<th>Expected value</th>",
+        "<th>Multiple values?</th>",
+        "<th>Guidance</th>",
+        "</tr>",
+        "</thead>",
+        "<tbody>",
     ]
     for slot in slots:
-        rows.append(
-            "| "
-            + " | ".join(
-                [
-                    field_name(slot),
-                    "Yes" if slot.required else "No",
-                    table_cell(slot.description or ""),
-                    expected_value(view, slot),
-                    multiple_values(slot),
-                    rules(slot),
-                    notes(slot),
-                ]
-            )
-            + " |"
+        rows.extend(
+            [
+                "<tr>",
+                f"<td>{field_name(slot)}</td>",
+                f"<td>{'Yes' if slot.required else 'No'}</td>",
+                f"<td>{html_cell(slot.description or '')}</td>",
+                f"<td>{expected_value(view, slot)}</td>",
+                f"<td>{multiple_values(slot)}</td>",
+                f"<td>{guidance(slot)}</td>",
+                "</tr>",
+            ]
         )
+    rows.extend(["</tbody>", "</table>"])
     return "\n".join(rows)
 
 
@@ -117,7 +137,7 @@ def field_name(slot: SlotDefinition) -> str:
     title = slot.title or slot.name
     if title == slot.name:
         return code(slot.name)
-    return table_cell(f"{title}<br>{code(slot.name)}")
+    return html_cell(f"{title}<br>{code(slot.name)}")
 
 
 def expected_value(view: SchemaView, slot: SlotDefinition) -> str:
@@ -125,8 +145,10 @@ def expected_value(view: SchemaView, slot: SlotDefinition) -> str:
     if enum:
         values = list(enum.permissible_values.keys())
         if len(values) <= 10:
-            return table_cell("<br>".join(code(value) for value in values))
-        return table_cell(f"Controlled vocabulary: [{slot.range}](#{anchor(slot.range)})")
+            return html_cell("<br>".join(code(value) for value in values))
+        return html_cell(
+            f'Controlled vocabulary: <a href="#{anchor(slot.range)}">{slot.range}</a>'
+        )
 
     type_labels = {
         "boolean": "Yes/no",
@@ -135,7 +157,7 @@ def expected_value(view: SchemaView, slot: SlotDefinition) -> str:
         "integer": "Whole number",
         "string": "Text",
     }
-    return table_cell(type_labels.get(slot.range or "", slot.range or "Text"))
+    return html_cell(type_labels.get(slot.range or "", slot.range or "Text"))
 
 
 def multiple_values(slot: SlotDefinition) -> str:
@@ -143,11 +165,11 @@ def multiple_values(slot: SlotDefinition) -> str:
         return "No"
     serialization = annotation_value(slot, "submission_serialization")
     if serialization == "semicolon_delimited":
-        return table_cell("Yes<br>Semicolon-delimited")
+        return html_cell("Yes<br>Semicolon-delimited")
     return "Yes"
 
 
-def rules(slot: SlotDefinition) -> str:
+def rule_parts(slot: SlotDefinition) -> list[str]:
     parts: list[str] = []
 
     max_length = annotation_value(slot, "max_length")
@@ -178,11 +200,40 @@ def rules(slot: SlotDefinition) -> str:
     if input_crs_required == "true":
         parts.append("Submitted spatial data must include a CRS")
 
-    return table_cell("<br>".join(parts) if parts else "")
+    return parts
 
 
-def notes(slot: SlotDefinition) -> str:
-    return table_cell("<br>".join(slot.comments or []))
+def guidance(slot: SlotDefinition) -> str:
+    parts = rule_parts(slot)
+    if has_long_guidance(slot):
+        parts.append(f'See <a href="#{field_guidance_anchor(slot)}">detailed guidance</a>.')
+    else:
+        parts.extend(slot.comments or [])
+    return html_list(parts)
+
+
+def render_additional_guidance(slots: Iterable[SlotDefinition]) -> str:
+    detailed_slots = [slot for slot in slots if has_long_guidance(slot)]
+    if not detailed_slots:
+        return ""
+
+    lines = ["### Additional Field Guidance", ""]
+    for slot in detailed_slots:
+        lines.extend(
+            [
+                f'#### <span id="{field_guidance_anchor(slot)}"></span>{slot.title or slot.name} ({code(slot.name)})',
+                "",
+            ]
+        )
+        for comment in slot.comments or []:
+            lines.append(f"- {html.escape(comment, quote=False)}")
+        lines.append("")
+    return "\n".join(lines).rstrip()
+
+
+def has_long_guidance(slot: SlotDefinition) -> bool:
+    comments = slot.comments or []
+    return len(comments) > 3 or sum(len(comment) for comment in comments) > 280
 
 
 def render_vocabularies(view: SchemaView) -> str:
@@ -231,7 +282,7 @@ def annotation_value(element: object, name: str) -> str | None:
     return str(getattr(annotation, "value", annotation))
 
 
-def table_cell(value: str) -> str:
+def html_cell(value: str) -> str:
     escaped = html.escape(str(value), quote=False)
     return escaped.replace("&lt;br&gt;", "<br>").replace("\n", " ").replace("|", "\\|")
 
@@ -243,6 +294,18 @@ def code(value: str) -> str:
 
 def anchor(value: str) -> str:
     return value.lower().replace(" ", "-")
+
+
+def field_guidance_anchor(slot: SlotDefinition) -> str:
+    return f"{anchor(slot.name)}-guidance"
+
+
+def html_list(items: list[str]) -> str:
+    if not items:
+        return ""
+    if len(items) == 1:
+        return html_cell(items[0])
+    return "<ul>" + "".join(f"<li>{html_cell(item)}</li>" for item in items) + "</ul>"
 
 
 if __name__ == "__main__":

@@ -1,10 +1,49 @@
-.md-typeset table:not([class]) th {
+.md-typeset .data-dictionary-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.md-typeset .data-dictionary-table__field {
+  width: 15%;
+}
+
+.md-typeset .data-dictionary-table__required {
+  width: 7%;
+}
+
+.md-typeset .data-dictionary-table__meaning {
+  width: 20%;
+}
+
+.md-typeset .data-dictionary-table__expected {
+  width: 18%;
+}
+
+.md-typeset .data-dictionary-table__multiple {
+  width: 10%;
+}
+
+.md-typeset .data-dictionary-table__guidance {
+  width: 30%;
+}
+
+.md-typeset .data-dictionary-table th {
   position: sticky;
-  top: 0;
-  z-index: 2;
+  top: 2.4rem;
+  z-index: 5;
   background: var(--md-default-bg-color);
 }
 
-.md-typeset table:not([class]) thead th {
+.md-typeset .data-dictionary-table thead th {
   box-shadow: 0 0.05rem 0 var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .data-dictionary-table td,
+.md-typeset .data-dictionary-table th {
+  vertical-align: top;
+}
+
+.md-typeset .data-dictionary-table ul {
+  margin: 0;
+  padding-left: 1rem;
 }
