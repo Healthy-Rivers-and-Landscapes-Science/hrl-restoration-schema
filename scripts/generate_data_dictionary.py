@@ -237,7 +237,8 @@ def table_cell(value: str) -> str:
 
 
 def code(value: str) -> str:
-    return f"`{html.escape(str(value), quote=False).replace('|', '\\|')}`"
+    escaped = html.escape(str(value), quote=False).replace("|", "\\|")
+    return f"`{escaped}`"
 
 
 def anchor(value: str) -> str:
