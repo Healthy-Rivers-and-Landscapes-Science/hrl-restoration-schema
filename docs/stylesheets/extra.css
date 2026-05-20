@@ -1,0 +1,10 @@
+.md-typeset table:not([class]) th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--md-default-bg-color);
+}
+
+.md-typeset table:not([class]) thead th {
+  box-shadow: 0 0.05rem 0 var(--md-default-fg-color--lightest);
+}
