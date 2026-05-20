@@ -73,6 +73,7 @@ docs/_build/
 
 # MkDocs / generated documentation
 site/
+docs/data_dictionary.md
 docs/reference/
 
 # PyBuilder

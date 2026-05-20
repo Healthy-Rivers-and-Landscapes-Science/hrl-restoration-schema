@@ -66,11 +66,14 @@ python -m pip install -r requirements.txt
 rm -rf docs/reference
 gen-doc --no-mergeimports --no-render-imports --truncate-descriptions false \
   --directory docs/reference schemas/hrl_restoration_project.yaml
+python scripts/generate_data_dictionary.py \
+  --schema schemas/hrl_restoration_project.yaml \
+  --output docs/data_dictionary.md
 mkdocs serve
 ```
 
-The generated `docs/reference/` directory is a build artifact and should not be
-hand-edited.
+The generated `docs/reference/` directory and `docs/data_dictionary.md` file are
+build artifacts and should not be hand-edited.
 
 ## Status
 

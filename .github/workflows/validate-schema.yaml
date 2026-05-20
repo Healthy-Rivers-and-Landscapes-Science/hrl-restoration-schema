@@ -9,6 +9,8 @@ on:
 jobs:
   validate-schema:
     runs-on: ubuntu-latest
+    env:
+      PYSTOW_HOME: ${{ github.workspace }}/.cache/pystow
 
     steps:
       - name: Check out repository
@@ -45,6 +47,14 @@ jobs:
             --directory /tmp/hrl-restoration-schema/docs \
             schemas/hrl_restoration_project.yaml
 
+      - name: Generate data dictionary smoke test
+        run: |
+          # The human-readable data dictionary must be reproducible from the
+          # LinkML source schema.
+          python scripts/generate_data_dictionary.py \
+            --schema schemas/hrl_restoration_project.yaml \
+            --output /tmp/hrl-restoration-schema/data_dictionary.md
+
       - name: Build MkDocs site smoke test
         run: |
           # Generate reference pages in-place for the build, then verify MkDocs.
@@ -55,4 +65,7 @@ jobs:
             --truncate-descriptions false \
             --directory docs/reference \
             schemas/hrl_restoration_project.yaml
+          python scripts/generate_data_dictionary.py \
+            --schema schemas/hrl_restoration_project.yaml \
+            --output docs/data_dictionary.md
           mkdocs build --strict

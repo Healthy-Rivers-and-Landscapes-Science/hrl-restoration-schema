@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PYSTOW_HOME: ${{ github.workspace }}/.cache/pystow
 
     steps:
       - name: Check out repository
@@ -42,6 +44,14 @@ jobs:
             --truncate-descriptions false \
             --directory docs/reference \
             schemas/hrl_restoration_project.yaml
+
+      - name: Generate human-readable data dictionary
+        run: |
+          # The data dictionary is generated from the LinkML schema so it stays
+          # aligned with field definitions, required flags, and vocabularies.
+          python scripts/generate_data_dictionary.py \
+            --schema schemas/hrl_restoration_project.yaml \
+            --output docs/data_dictionary.md
 
       - name: Build MkDocs site
         run: mkdocs build --strict

@@ -5,6 +5,7 @@ repo_url: https://github.com/lucy-dwr/hrl-restoration-schema
 nav:
   - Home: index.md
   - Schema overview: schema_overview.md
+  - Data dictionary: data_dictionary.md
   - Submission guidance: submission_guidance.md
   - Geometry policy: geometry_policy.md
   - Business rules: business_rules.md
