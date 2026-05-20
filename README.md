@@ -8,6 +8,10 @@ The maintained source of truth is
 `schemas/hrl_restoration_project.yaml`. Generated files should be derived from
 that LinkML schema rather than edited directly.
 
+## Schema docs site
+
+To view the schema docs site, visit https://lucy-dwr.github.io/hrl-restoration-schema/.
+
 ## What this repository contains
 
 - LinkML schema for HRL restoration spatial data submissions with inline
