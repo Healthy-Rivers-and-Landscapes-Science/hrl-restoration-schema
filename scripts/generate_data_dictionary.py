@@ -64,6 +64,11 @@ def render_data_dictionary(view: SchemaView, schema_path: Path) -> str:
     ]
 
     lines = [
+        "---",
+        "hide:",
+        "  - toc",
+        "---",
+        "",
         "# Data Dictionary",
         "",
         "<!-- This page is generated from the LinkML schema. Do not edit it directly. -->",
