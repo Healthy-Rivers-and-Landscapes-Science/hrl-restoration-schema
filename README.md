@@ -81,6 +81,20 @@ mkdocs serve
 The generated `docs/reference/` directory and `docs/data_dictionary.md` file are
 build artifacts and should not be hand-edited.
 
+## Release and schema sync
+
+When a new release is published in this repository, a GitHub Actions workflow
+automatically copies `schemas/hrl_restoration_project.yaml` from the released
+tag into `lucy-dwr/dwr-restoration-spatial-data` at
+`schemas/hrl_restoration_project.yaml` and opens a pull request there.
+
+The file is copied from the tagged release, not from `main`. If the schema file
+is already identical in the target repository, no pull request is created.
+
+The workflow requires a repository secret named `TARGET_REPO_TOKEN`: a
+fine-grained personal access token scoped to `lucy-dwr/dwr-restoration-spatial-data`
+with Contents (read and write) and Pull requests (read and write) permissions.
+
 ## Status
 
 This is an initial draft schema repository.
