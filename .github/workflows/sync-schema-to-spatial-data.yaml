@@ -1,0 +1,86 @@
+name: Sync schema to spatial data repository
+
+# Triggered when a new release is published in this repository.
+# Copies schemas/hrl_restoration_project.yaml from the released tag into
+# lucy-dwr/dwr-restoration-spatial-data and opens a pull request there.
+#
+# Required secret in this repository:
+#   TARGET_REPO_TOKEN — a fine-grained personal access token (or classic PAT)
+#   scoped to lucy-dwr/dwr-restoration-spatial-data with these permissions:
+#     Contents: Read and write (to push the sync branch)
+#     Pull requests: Read and write (to open the PR)
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  sync-schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source repository at release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          path: source
+
+      - name: Verify source schema file exists at release tag
+        run: |
+          if [ ! -f "source/schemas/hrl_restoration_project.yaml" ]; then
+            echo "::error::schemas/hrl_restoration_project.yaml does not exist at tag ${{ github.event.release.tag_name }}"
+            exit 1
+          fi
+
+      - name: Check out target repository
+        uses: actions/checkout@v4
+        with:
+          repository: lucy-dwr/dwr-restoration-spatial-data
+          token: ${{ secrets.TARGET_REPO_TOKEN }}
+          path: target
+
+      - name: Compute sanitized branch name
+        id: branch
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          # Replace characters that are invalid or awkward in branch names with hyphens.
+          SAFE_TAG="${TAG//[^a-zA-Z0-9._-]/-}"
+          echo "name=sync/hrl-restoration-project-schema-${SAFE_TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Copy schema file into target repository
+        run: |
+          mkdir -p target/schemas
+          cp source/schemas/hrl_restoration_project.yaml target/schemas/hrl_restoration_project.yaml
+
+      - name: Open pull request in target repository
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.TARGET_REPO_TOKEN }}
+          path: target
+          add-paths: schemas/hrl_restoration_project.yaml
+          branch: ${{ steps.branch.outputs.name }}
+          base: main
+          title: "Update HRL restoration project schema from ${{ github.event.release.tag_name }}"
+          commit-message: "Sync HRL restoration project schema from lucy-dwr/hrl-restoration-schema ${{ github.event.release.tag_name }}"
+          body: |
+            ## Schema sync from release `${{ github.event.release.tag_name }}`
+
+            | Field | Value |
+            |---|---|
+            | Source repository | `lucy-dwr/hrl-restoration-schema` |
+            | Source file | `schemas/hrl_restoration_project.yaml` |
+            | Release tag | `${{ github.event.release.tag_name }}` |
+            | Target repository | `lucy-dwr/dwr-restoration-spatial-data` |
+            | Target file | `schemas/hrl_restoration_project.yaml` |
+
+            The schema file was copied from the tagged release, not from `main`.
+
+      - name: Report outcome
+        run: |
+          if [ "${{ steps.pr.outputs.pull-request-created }}" = "true" ]; then
+            echo "Pull request created: ${{ steps.pr.outputs.pull-request-url }}"
+          else
+            echo "No changes detected — schemas/hrl_restoration_project.yaml is already up to date in the target repository."
+          fi
