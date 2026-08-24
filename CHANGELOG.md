@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.2.0] - 2026-08-24
+
+### Added
+
+- Optional integer `funding_gap` compatibility input on
+  `RestorationProjectSubmission` for legacy submissions.
+- Valid and invalid fixtures for numeric legacy submission values, non-numeric
+  values, canonical requiredness, and public-record exclusion.
+
+### Changed
+
+- Documented that canonical `funding_gap` normally equals `estimated_budget -
+  funding_secured`; a supplied legacy value is non-authoritative when the
+  inputs are available, and may be passed through only when they are
+  insufficient, with warnings in either applicable case.
+- Documented the `hrl-restoration-data-pipeline` migration to the immutable
+  `v1.2.0` schema snapshot and configured schema version. The
+  `hrl-restoration-map` is unaffected because `funding_gap` remains
+  non-public.
+
 ## [v1.1.1] - 2026-08-24
 
 ### Fixed

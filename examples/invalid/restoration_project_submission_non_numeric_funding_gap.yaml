@@ -1,0 +1,17 @@
+# Target profile: RestorationProjectSubmission
+# Expected failure: funding_gap must be an integer when supplied.
+project_id: HRL-EXAMPLE-010
+project_name: Example Legacy Funding Gap
+project_description: Submission fixture with a non-numeric legacy funding gap.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder
+funding_gap: unknown

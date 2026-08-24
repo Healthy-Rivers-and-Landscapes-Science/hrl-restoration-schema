@@ -43,7 +43,19 @@ FIXTURES: dict[str, tuple[str, bool]] = {
         "RestorationProjectSubmission",
         False,
     ),
+    "examples/invalid/restoration_project_submission_non_numeric_funding_gap.yaml": (
+        "RestorationProjectSubmission",
+        False,
+    ),
+    "examples/invalid/restoration_project_canonical_missing_funding_gap.yaml": (
+        "RestorationProjectCanonicalRecord",
+        False,
+    ),
     "examples/invalid/restoration_project_public_private_contact_email.yaml": (
+        "RestorationProjectPublicRecord",
+        False,
+    ),
+    "examples/invalid/restoration_project_public_funding_gap.yaml": (
         "RestorationProjectPublicRecord",
         False,
     ),

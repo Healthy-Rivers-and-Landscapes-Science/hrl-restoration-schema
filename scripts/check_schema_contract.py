@@ -54,6 +54,7 @@ def main() -> None:
         "construction_completion_year",
         "estimated_budget",
         "funding_secured",
+        "funding_gap",
     }:
         require(slot_name in submission and not submission[slot_name].required, f"{slot_name} must be conditionally required by the pipeline")
 
@@ -80,7 +81,8 @@ def main() -> None:
         require(canonical[slot_name].required, f"{slot_name} must be required for canonical records")
 
     require("funding_gap" in canonical and canonical["funding_gap"].required, "funding_gap must be required for canonical records")
-    require("funding_gap" not in submission and "funding_gap" not in public, "funding_gap must not be submitted or public")
+    require(submission["funding_gap"].range == "integer", "submitted funding_gap must retain its integer range")
+    require("funding_gap" not in public, "funding_gap must not be public")
     require("record_status" in canonical and canonical["record_status"].required, "record_status must be required for canonical records")
 
     expected_public = {

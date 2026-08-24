@@ -1,0 +1,21 @@
+# Target profile: RestorationProjectCanonicalRecord
+# Expected failure: canonical records require funding_gap.
+project_id: HRL-EXAMPLE-011
+project_name: Example Canonical Record Missing Funding Gap
+project_description: Canonical fixture intentionally omits the required funding gap.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder
+source_organization_code: DWR
+last_submission_id: SUBMISSION-EXAMPLE-011
+source_data_as_of: "2026-08-24"
+record_status: active
+update_date: "2026-08-24"

@@ -1,0 +1,18 @@
+# Target profile: RestorationProjectPublicRecord
+# Expected failure: funding_gap is not part of the public-record contract.
+project_id: HRL-EXAMPLE-012
+project_name: Example Public Record With Funding Gap
+project_description: Public fixture intentionally contains a non-public funding field.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+record_status: active
+geometry: attribute-only-geometry-placeholder
+funding_gap: 125000

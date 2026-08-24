@@ -142,6 +142,11 @@ classes:
       Fields expected in a submitted HRL restoration spatial data file. This
       profile requires a pre-assigned HRL project ID. Conditional requiredness
       and registry checks are enforced by the data pipeline.
+    slots:
+      - funding_gap
+    slot_usage:
+      funding_gap:
+        required: false
 
   # This class describes the standardized internal record after validation and
   # ingestion, so it adds program-assigned fields to the shared project fields.
@@ -160,7 +165,8 @@ classes:
       - record_status
       - update_date
     # These required flags are canonical-record-specific. funding_gap is a
-    # derived field available only after canonical transformation.
+    # derived field available after canonical transformation and is required
+    # even when a legacy submitted value had to be passed through.
     slot_usage:
       project_id:
         required: true
@@ -440,13 +446,20 @@ slots:
 
   funding_gap:
     title: Funding gap
-    description: Gap between estimated total budget and funding secured.
+    description: >-
+      Calculated canonical gap between estimated total budget and funding
+      secured; a numeric legacy submission value may be supplied when the
+      source budget fields are insufficient to calculate it.
     range: integer
     comments:
       - >-
-        Canonical-only derived value calculated as estimated_budget minus
-        funding_secured. It is not an authoritative submitted field; the
-        pipeline reports a discrepancy when legacy input supplies a value.
+        Canonical value is normally calculated as estimated_budget minus
+        funding_secured. A supplied legacy submission value is not
+        authoritative when both source budget fields are present: the pipeline
+        recalculates the value and warns if it differs. When those fields are
+        insufficient to calculate the gap, the pipeline may pass through a
+        numeric supplied value with a warning. This field is excluded from
+        public records.
 
   funding_sources:
     title: Funding sources

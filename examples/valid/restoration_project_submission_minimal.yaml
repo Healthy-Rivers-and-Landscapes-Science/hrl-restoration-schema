@@ -14,3 +14,6 @@ project_type:
 target_species:
   - Chinook salmon
 geometry: attribute-only-geometry-placeholder
+# Legacy values are accepted for compatibility; the pipeline applies its
+# documented precedence rules when budget fields are also present.
+funding_gap: 125000
