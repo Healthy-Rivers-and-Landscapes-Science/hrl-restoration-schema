@@ -37,6 +37,9 @@ jobs:
           mkdir -p /tmp/hrl-restoration-schema
           gen-json-schema schemas/hrl_restoration_project.yaml > /tmp/hrl-restoration-schema/hrl_restoration_project.schema.json
 
+      - name: Check schema profile contract
+        run: python scripts/check_schema_contract.py --schema schemas/hrl_restoration_project.yaml
+
       - name: Generate LinkML documentation smoke test
         run: |
           # gen-doc fails if the schema reference documentation cannot be generated.

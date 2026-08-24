@@ -23,6 +23,7 @@ from linkml_runtime.utils.schemaview import SchemaView
 
 SUBMISSION_CLASS = "RestorationProjectSubmission"
 CANONICAL_CLASS = "RestorationProjectCanonicalRecord"
+PUBLIC_CLASS = "RestorationProjectPublicRecord"
 
 
 def main() -> None:
@@ -54,6 +55,7 @@ def main() -> None:
 def render_data_dictionary(view: SchemaView, schema_path: Path) -> str:
     submission_slots = view.class_induced_slots(SUBMISSION_CLASS)
     canonical_slots = view.class_induced_slots(CANONICAL_CLASS)
+    public_slots = view.class_induced_slots(PUBLIC_CLASS)
 
     submission_by_name = {slot.name: slot for slot in submission_slots}
     canonical_changes = [
@@ -89,6 +91,15 @@ def render_data_dictionary(view: SchemaView, schema_path: Path) -> str:
         render_slot_table(view, canonical_changes),
         "",
         render_additional_guidance(canonical_changes),
+        "",
+        "## Public Export Fields",
+        "",
+        "This is the separate public-data contract produced from approved canonical records. "
+        "It intentionally excludes non-public contact, contractor, funding, and provenance fields.",
+        "",
+        render_slot_table(view, public_slots),
+        "",
+        render_additional_guidance(public_slots),
         "",
         "## Controlled Vocabularies",
         "",
