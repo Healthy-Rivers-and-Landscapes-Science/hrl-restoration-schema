@@ -4,17 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.1.0] - 2026-08-24
+
 ### Added
 
-- Initial LinkML schema for HRL restoration spatial data submissions.
-- Initial repository documentation structure.
-- Placeholder directories for generated artifacts and examples.
+- Stable, submitted string `project_id` behavior: every submission supplies
+  its pre-assigned identifier, which the downstream data pipeline checks
+  against the program registry.
+- Expanded canonical provenance and lifecycle fields, including source,
+  submission, date, funding-gap, and record-status information.
+- A separate public-record contract that excludes private contact, contractor,
+  non-public funding, and canonical provenance fields.
+- Executable valid and invalid fixtures covering the three record profiles.
 
 ### Changed
 
-- Made `project_id` a required stable string field for submission, canonical,
-  and public records.
-- Added multi-valued controlled `lead_entity`, canonical provenance and
-  lifecycle fields, `RecordStatusEnum`, and `RestorationProjectPublicRecord`.
-- Restricted derived `funding_gap` to canonical records and documented
-  pipeline-owned conditional validation and publication approval rules.
+- Prepared the schema contract on `main` for the `v1.1.0` release; no tag or
+  GitHub release has been created.

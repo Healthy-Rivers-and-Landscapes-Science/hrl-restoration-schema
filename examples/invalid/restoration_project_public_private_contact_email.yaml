@@ -1,0 +1,18 @@
+# Target profile: RestorationProjectPublicRecord
+# Expected failure: contact_email is not part of the public-record contract.
+project_id: HRL-EXAMPLE-008
+project_name: Example Fish Passage Project
+project_description: Public fixture intentionally contains one private field.
+project_stage:
+  - construction
+lead_entity:
+  - sfpuc
+early_implementation: true
+system: Tuolumne
+project_type:
+  - fish passage improvement
+target_species:
+  - Steelhead trout
+record_status: active
+geometry: attribute-only-geometry-placeholder
+contact_email: private-contact@example.org

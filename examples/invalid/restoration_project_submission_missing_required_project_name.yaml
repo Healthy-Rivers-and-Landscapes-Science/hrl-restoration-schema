@@ -1,0 +1,15 @@
+# Target profile: RestorationProjectSubmission
+# Expected failure: required project_name is absent.
+project_id: HRL-EXAMPLE-006
+project_description: Missing one required shared project field.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder

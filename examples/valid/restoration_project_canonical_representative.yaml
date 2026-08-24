@@ -1,0 +1,38 @@
+# Target profile: RestorationProjectCanonicalRecord
+# Attribute-only fixture; geometry is a placeholder, not spatial data.
+project_id: HRL-EXAMPLE-002
+project_name: Example Tributary Habitat Project
+project_description: Representative canonical record with provenance and lifecycle fields.
+project_stage:
+  - construction
+lead_entity:
+  - water_forum
+contact_name: Example Program Contact
+contact_email: contact@example.org
+contractors:
+  - Example Ecological Consulting
+early_implementation: true
+construction_start_year: 2026
+construction_completion_year: 2028
+estimated_budget: 750000
+funding_secured: 500000
+funding_sources:
+  - Example Restoration Grant
+system: American
+project_type:
+  - rearing habitat
+  - spawning habitat
+acreage: 42.5
+acreage_tributary_rearing: 30.0
+acreage_tributary_spawning: 12.5
+target_species:
+  - Chinook salmon
+  - Steelhead trout
+geometry: attribute-only-geometry-placeholder
+funding_gap: 250000
+source_project_id: SOURCE-TRIB-42
+source_organization_code: WF
+last_submission_id: SUBMISSION-EXAMPLE-002
+source_data_as_of: "2026-05-15"
+record_status: active
+update_date: "2026-06-01"

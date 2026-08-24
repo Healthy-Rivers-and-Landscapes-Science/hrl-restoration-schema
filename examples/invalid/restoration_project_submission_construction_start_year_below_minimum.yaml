@@ -1,0 +1,17 @@
+# Target profile: RestorationProjectSubmission
+# Expected failure: construction_start_year is below its 2018 minimum.
+project_id: HRL-EXAMPLE-007
+project_name: Example Floodplain Reconnection
+project_description: Contains one construction year below the schema boundary.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+construction_start_year: 2017
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder

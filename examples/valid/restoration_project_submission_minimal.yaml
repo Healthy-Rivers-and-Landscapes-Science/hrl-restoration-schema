@@ -1,0 +1,16 @@
+# Target profile: RestorationProjectSubmission
+# Attribute-only fixture; geometry is a placeholder, not spatial data.
+project_id: HRL-EXAMPLE-001
+project_name: Example Floodplain Reconnection
+project_description: Representative attribute-only submission fixture.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder

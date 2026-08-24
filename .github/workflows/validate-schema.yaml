@@ -40,6 +40,9 @@ jobs:
       - name: Check schema profile contract
         run: python scripts/check_schema_contract.py --schema schemas/hrl_restoration_project.yaml
 
+      - name: Validate attribute-contract fixtures
+        run: python scripts/validate_fixtures.py --schema schemas/hrl_restoration_project.yaml
+
       - name: Generate LinkML documentation smoke test
         run: |
           # gen-doc fails if the schema reference documentation cannot be generated.

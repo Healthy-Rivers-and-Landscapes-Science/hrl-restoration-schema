@@ -1,0 +1,16 @@
+# Target profile: RestorationProjectSubmission
+# Expected failure: project_stage is not in ProjectStageEnum.
+project_id: HRL-EXAMPLE-004
+project_name: Example Floodplain Reconnection
+project_description: Contains one invalid controlled-vocabulary value.
+project_stage:
+  - not-a-project-stage
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder

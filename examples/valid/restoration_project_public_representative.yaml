@@ -1,0 +1,22 @@
+# Target profile: RestorationProjectPublicRecord
+# Attribute-only fixture; geometry is a placeholder, not spatial data.
+project_id: HRL-EXAMPLE-003
+project_name: Example Fish Passage Project
+project_description: Representative public export record without private or provenance fields.
+project_stage:
+  - construction
+lead_entity:
+  - sfpuc
+early_implementation: true
+construction_start_year: 2027
+construction_completion_year: 2029
+estimated_budget: 300000
+funding_sources:
+  - Example Public Grant
+system: Tuolumne
+project_type:
+  - fish passage improvement
+target_species:
+  - Steelhead trout
+record_status: active
+geometry: attribute-only-geometry-placeholder

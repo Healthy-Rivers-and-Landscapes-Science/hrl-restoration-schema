@@ -1,0 +1,15 @@
+# Target profile: RestorationProjectSubmission
+# Expected failure: required stable project_id is absent.
+project_name: Example Floodplain Reconnection
+project_description: Missing the required project identifier.
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+target_species:
+  - Chinook salmon
+geometry: attribute-only-geometry-placeholder
