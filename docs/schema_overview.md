@@ -3,12 +3,18 @@
 This repository uses [LinkML](https://linkml.io) as the source-of-truth schema language. The
 maintained schema is [`schemas/hrl_restoration_project.yaml`](https://github.com/lucy-dwr/hrl-restoration-schema/blob/main/schemas/hrl_restoration_project.yaml).
 
-The schema has two main profiles:
+The schema has three record profiles:
 
 - [`RestorationProjectSubmission`](reference/RestorationProjectSubmission.md) describes the attributes expected from
   submitting entities.
 - [`RestorationProjectCanonicalRecord`](reference/RestorationProjectCanonicalRecord.md) describes standardized records after
   validation, ingestion, and assignment of program-managed fields.
+- [`RestorationProjectPublicRecord`](reference/RestorationProjectPublicRecord.md) defines the deliberately restricted public-export
+  contract produced from approved canonical records.
+
+Every submission record includes a program-assigned, stable string
+[`project_id`](reference/project_id.md). The data pipeline checks that ID against
+the DWR-managed registry; registry assignment is not a LinkML function.
 
 Generated JSON Schema and other artifacts will be used by validation tools and
 downstream systems. Those generated outputs should be reproducible from the

@@ -7,6 +7,7 @@ Expected generated artifacts include:
 
 - JSON Schema for submission records
 - JSON Schema for canonical records
+- JSON Schema for public export records
 - Controlled vocabulary JSON/CSV
 - Human-readable data dictionary
 
@@ -18,6 +19,10 @@ Validation code should own:
 - Validating geometry with geospatial libraries
 - Producing validation reports
 - Writing standardized outputs
+- Applying conditional business rules, project-ID registry checks, and
+  conservative deterministic repairs
+- Creating JSON and HTML validation reports and stopping successful records at
+  an approval candidate until a program lead supplies an `_APPROVE` marker
 
 Proposed validation report fields:
 

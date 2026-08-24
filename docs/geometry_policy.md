@@ -7,6 +7,11 @@ Restoration areas are expected to be polygons or multipolygons. Fish passage
 and fish screen installation or improvement project types may be represented as
 points or multipoints, if that remains consistent with the schema.
 
+Each standardized record represents one `project_id` and one geometry. The
+pipeline standardizes polygonal outputs to `MULTIPOLYGON` and point outputs to
+`MULTIPOINT`; it is responsible for approved consolidation of source parts and
+for deterministic geometry repair.
+
 Actual geometry checks will be performed by validation code using geospatial
 libraries, not solely by [LinkML](https://linkml.io). Validation code should check:
 

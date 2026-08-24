@@ -32,13 +32,18 @@ To see the GitHub repository that hosts the schema, visit https://github.com/luc
 ## Schema profiles
 
 `RestorationProjectSubmission` describes fields expected from submitting
-entities. Program-assigned or system-assigned fields, such as `project_id` and
-`update_date`, are not required in this profile and should not be supplied by
-submitters.
+entities. Every record must include its pre-assigned, stable string
+`project_id`; the pipeline verifies it against the program's project-ID
+registry. Submission-manifest metadata and system-assigned canonical fields do
+not belong in submitted records.
 
 `RestorationProjectCanonicalRecord` describes standardized records stored after
 validation and ingestion. This profile includes program-assigned, derived, and
-system-maintained fields.
+system-maintained fields, including provenance and lifecycle status.
+
+`RestorationProjectPublicRecord` is the separate public-export contract. It is
+produced from approved canonical records and intentionally excludes contact,
+contractor, non-public funding, and canonical provenance fields.
 
 ## Intended workflow
 
