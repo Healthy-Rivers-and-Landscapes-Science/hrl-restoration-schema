@@ -32,10 +32,12 @@ To see the GitHub repository that hosts the schema, visit https://github.com/luc
 ## Schema profiles
 
 `RestorationProjectSubmission` describes fields expected from submitting
-entities. Every record must include its pre-assigned, stable string
-`project_id`; the pipeline verifies it against the program's project-ID
-registry. Submission-manifest metadata and system-assigned canonical fields do
-not belong in submitted records.
+entities. The HRL program assigns the stable string `project_id` before
+submission, and submitters must include that assigned ID on every submitted
+record. The pipeline validates the ID against the DWR-managed project-ID
+registry and never creates project IDs automatically. Submission-manifest
+metadata and other system-assigned canonical fields do not belong in submitted
+records.
 
 `RestorationProjectCanonicalRecord` describes standardized records stored after
 validation and ingestion. This profile includes program-assigned, derived, and

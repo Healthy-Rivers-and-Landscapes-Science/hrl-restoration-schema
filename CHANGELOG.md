@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.1.1] - 2026-08-24
+
+### Fixed
+
+- Corrected submission-profile documentation to clarify that `project_id` is
+  program-assigned before submission, required on every submitted record,
+  validated against the DWR-managed project-ID registry, and never generated
+  automatically by the pipeline.
+
 ## [v1.1.0] - 2026-08-24
 
 ### Added
