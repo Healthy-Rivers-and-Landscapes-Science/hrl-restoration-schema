@@ -1,0 +1,38 @@
+lead_entities:
+  - lead_entity_id: dwr
+    full_name: California Department of Water Resources
+    abbreviation: DWR
+    organization_type: state_agency
+    aliases:
+      - Department of Water Resources
+      - CA Department of Water Resources
+      - California DWR
+  - lead_entity_id: ebmud
+    full_name: East Bay Municipal Utility District
+    abbreviation: EBMUD
+    organization_type: special_district
+    aliases:
+      - East Bay MUD
+  - lead_entity_id: water_forum
+    full_name: Water Forum
+    organization_type: regional_partnership
+    aliases:
+      - The Water Forum
+  - lead_entity_id: sfpuc
+    full_name: San Francisco Public Utilities Commission
+    abbreviation: SFPUC
+    organization_type: local_agency
+    aliases:
+      - San Francisco PUC
+      - SF Public Utilities Commission
+  - lead_entity_id: yuba_water_agency
+    full_name: Yuba Water Agency
+    organization_type: special_district
+    aliases:
+      - Yuba County Water Agency
+  - lead_entity_id: solano_county_water_agency
+    full_name: Solano County Water Agency
+    abbreviation: SCWA
+    organization_type: special_district
+    aliases:
+      - Solano Water Agency
