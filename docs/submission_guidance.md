@@ -24,7 +24,9 @@ convention, but the schema meaning remains multivalued.
 The pipeline applies conditional rules that LinkML intentionally does not
 duplicate: contact fields are warned on when absent; construction dates and
 funding values become errors at construction and post-construction monitoring
-stages; and acreage is required except for projects consisting solely of fish
-passage and/or fish screen work. A passing submission becomes an approval
+stages; and acreage is a warning before construction but an error at
+construction and post-construction for area-based project types (with an
+exemption for projects consisting solely of fish passage and/or fish screen
+work). A passing submission becomes an approval
 candidate, not public data. It is published only after an authorized reviewer
 uploads the `_APPROVE` marker.

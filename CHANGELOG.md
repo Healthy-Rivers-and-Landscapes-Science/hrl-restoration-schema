@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.3.0] - 2026-08-27
+
+### Added
+
+- Lead entity catalog metadata for full organization names, abbreviations, and
+  accepted aliases, including five additional program lead entities.
+- Valid and invalid fixtures for optional descriptions and target species, the
+  public description requirement, and exclusion of lifecycle status from public
+  records.
+
+### Changed
+
+- Submission records may omit `project_description` and `target_species`.
+  Public records still require a project description, while target species is
+  optional when a project has no identified species target.
+- Submission `lead_entity` values may use a cataloged full name, abbreviation,
+  or alias. The validation pipeline must resolve them to stable
+  `LeadEntityEnum` identifiers before canonicalization.
+- Public exports contain approved active canonical records only and no longer
+  expose `record_status`.
+- Acreage is a warning before construction and an error at construction and
+  post-construction monitoring for area-based project types, with the existing
+  fish passage- and fish screen-only exemption.
+
 ## [v1.2.0] - 2026-08-24
 
 ### Added

@@ -36,3 +36,24 @@ lead_entities:
     organization_type: special_district
     aliases:
       - Solano Water Agency
+  - lead_entity_id: sutter_butte_flood_control_agency
+    full_name: Sutter Butte Flood Control Agency
+    abbreviation: SBFCA
+    organization_type: special_district
+  - lead_entity_id: river_partners
+    full_name: River Partners
+    organization_type: other
+  - lead_entity_id: modesto_irrigation_district
+    full_name: Modesto Irrigation District
+    abbreviation: MID
+    organization_type: special_district
+  - lead_entity_id: turlock_irrigation_district
+    full_name: Turlock Irrigation District
+    abbreviation: TID
+    organization_type: special_district
+  - lead_entity_id: south_yuba_river_citizens_league
+    full_name: South Yuba River Citizens League
+    abbreviation: SYRCL
+    organization_type: other
+    aliases:
+      - South Yuba River Citizen League

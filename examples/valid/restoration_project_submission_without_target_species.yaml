@@ -1,0 +1,14 @@
+# Target profile: RestorationProjectSubmission
+# An ecosystem-focused project may omit target_species.
+project_id: HRL-EXAMPLE-004
+project_name: Example Ecosystem Process Project
+project_description: Representative submission with no species-specific target.
+project_stage:
+  - concept/feasibility
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+geometry: attribute-only-geometry-placeholder

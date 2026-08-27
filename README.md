@@ -2,7 +2,7 @@
 
 This repository contains the machine-readable schema and controlled
 vocabularies for Healthy Rivers and Landscapes (HRL) restoration spatial data
-submissions.
+submissions. The schema is created using [LinkML](https://linkml.io).
 
 The maintained source of truth is
 `schemas/hrl_restoration_project.yaml`. Generated files should be derived from
@@ -26,7 +26,6 @@ To see the GitHub repository that hosts the schema, visit https://github.com/luc
 
 - Spatial file validation code
 - Azure pipeline infrastructure
-- PostGIS database migrations
 - API or map application code
 
 ## Schema profiles
@@ -44,8 +43,9 @@ validation and ingestion. This profile includes program-assigned, derived, and
 system-maintained fields, including provenance and lifecycle status.
 
 `RestorationProjectPublicRecord` is the separate public-export contract. It is
-produced from approved canonical records and intentionally excludes contact,
-contractor, non-public funding, and canonical provenance fields.
+produced from approved active canonical records and intentionally excludes
+lifecycle, contact, contractor, non-public funding, and canonical provenance
+fields.
 
 ## Intended workflow
 
@@ -56,10 +56,11 @@ If the schema needs to be updated, the process is:
 3. Regenerate generated artifacts
 4. Validate examples
 5. Open a pull request
+6. Tag a new release
 
 ## Namespace
 
-The schema namespace currently uses the anticipated GitHub Pages URL:
+The schema namespace currently uses a GitHub Pages URL:
 
 `https://lucy-dwr.github.io/hrl-restoration-schema/`
 
@@ -111,6 +112,19 @@ configured schema version, recalculate the canonical value from
 `estimated_budget - funding_secured` when possible, and issue the documented
 warnings for differing or pass-through legacy values. No change is expected in
 `hrl-restoration-map` because `funding_gap` remains non-public.
+
+### v1.3.0 migration note
+
+`v1.3.0` permits submissions without `project_description` or
+`target_species`; a public record still requires a description, while target
+species remains optional when a project has no identified species target.
+Submission `lead_entity` values may use cataloged organization names,
+abbreviations, or aliases, which the data pipeline must resolve to stable
+`LeadEntityEnum` IDs before canonicalization. The pipeline must export only
+approved active canonical records and must not include `record_status` in the
+public record output. Downstream consumers should import the immutable
+`v1.3.0` schema snapshot and update their configured schema version before
+adopting these contract changes.
 
 ## Status
 

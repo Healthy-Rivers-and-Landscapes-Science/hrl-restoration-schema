@@ -1,0 +1,13 @@
+# Target profile: RestorationProjectSubmission
+# A description may be added during public-publication review.
+project_id: HRL-EXAMPLE-006
+project_name: Example Early-Stage Project
+project_stage:
+  - concept/feasibility
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+geometry: attribute-only-geometry-placeholder

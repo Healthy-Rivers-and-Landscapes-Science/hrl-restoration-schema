@@ -1,0 +1,13 @@
+# Target profile: RestorationProjectPublicRecord
+# Public records must have a description.
+project_id: HRL-EXAMPLE-007
+project_name: Example Project Missing Public Description
+project_stage:
+  - design
+lead_entity:
+  - dwr
+early_implementation: false
+system: Sacramento
+project_type:
+  - bypass floodplain habitat
+geometry: attribute-only-geometry-placeholder

@@ -15,11 +15,27 @@ FIXTURES: dict[str, tuple[str, bool]] = {
         "RestorationProjectSubmission",
         True,
     ),
+    "examples/valid/restoration_project_submission_without_target_species.yaml": (
+        "RestorationProjectSubmission",
+        True,
+    ),
+    "examples/valid/restoration_project_submission_without_description.yaml": (
+        "RestorationProjectSubmission",
+        True,
+    ),
     "examples/valid/restoration_project_canonical_representative.yaml": (
         "RestorationProjectCanonicalRecord",
         True,
     ),
+    "examples/valid/restoration_project_canonical_without_description.yaml": (
+        "RestorationProjectCanonicalRecord",
+        True,
+    ),
     "examples/valid/restoration_project_public_representative.yaml": (
+        "RestorationProjectPublicRecord",
+        True,
+    ),
+    "examples/valid/restoration_project_public_without_target_species.yaml": (
         "RestorationProjectPublicRecord",
         True,
     ),
@@ -39,6 +55,10 @@ FIXTURES: dict[str, tuple[str, bool]] = {
         "RestorationProjectSubmission",
         False,
     ),
+    "examples/invalid/restoration_project_public_missing_project_description.yaml": (
+        "RestorationProjectPublicRecord",
+        False,
+    ),
     "examples/invalid/restoration_project_submission_construction_start_year_below_minimum.yaml": (
         "RestorationProjectSubmission",
         False,
@@ -56,6 +76,10 @@ FIXTURES: dict[str, tuple[str, bool]] = {
         False,
     ),
     "examples/invalid/restoration_project_public_funding_gap.yaml": (
+        "RestorationProjectPublicRecord",
+        False,
+    ),
+    "examples/invalid/restoration_project_public_record_status.yaml": (
         "RestorationProjectPublicRecord",
         False,
     ),

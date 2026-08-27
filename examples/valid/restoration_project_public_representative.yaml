@@ -18,5 +18,4 @@ project_type:
   - fish passage improvement
 target_species:
   - Steelhead trout
-record_status: active
 geometry: attribute-only-geometry-placeholder
