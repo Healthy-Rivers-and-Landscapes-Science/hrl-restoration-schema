@@ -106,12 +106,13 @@ with Contents (read and write) and Pull requests (read and write) permissions.
 ### v1.2.0 migration note
 
 `v1.2.0` accepts an optional integer legacy `funding_gap` on submissions while
-keeping it required in canonical records and excluded from public records. The
-data pipeline must import the immutable `v1.2.0` schema snapshot, update its
-configured schema version, recalculate the canonical value from
+excluding it from public records. The data pipeline must import the immutable
+schema snapshot, recalculate the canonical value from
 `estimated_budget - funding_secured` when possible, and issue the documented
-warnings for differing or pass-through legacy values. No change is expected in
-`hrl-restoration-map` because `funding_gap` remains non-public.
+warnings for differing or pass-through legacy values. `v1.3.1` also permits a
+canonical record to omit `funding_gap` while the underlying financial inputs
+are unavailable. No change is expected in `hrl-restoration-map` because
+`funding_gap` remains non-public.
 
 ### v1.3.0 migration note
 

@@ -13,7 +13,7 @@ repository's LinkML validator.
 | Fixture | Target LinkML class/profile | Expected result |
 | --- | --- | --- |
 | `valid/restoration_project_submission_minimal.yaml` | `RestorationProjectSubmission` | Pass; smallest required submitted attribute set. |
-| `valid/restoration_project_canonical_representative.yaml` | `RestorationProjectCanonicalRecord` | Pass; shared fields plus canonical provenance, funding-gap, and lifecycle fields. |
+| `valid/restoration_project_canonical_representative.yaml` | `RestorationProjectCanonicalRecord` | Pass; shared fields plus canonical provenance, derived funding-gap when known, and lifecycle fields. |
 | `valid/restoration_project_public_representative.yaml` | `RestorationProjectPublicRecord` | Pass; public-export fields only. |
 
 ## Invalid fixtures

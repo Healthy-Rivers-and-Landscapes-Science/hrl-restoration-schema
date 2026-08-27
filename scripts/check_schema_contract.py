@@ -104,7 +104,7 @@ def main() -> None:
     for slot_name in internal_canonical_only - {"source_project_id"}:
         require(canonical[slot_name].required, f"{slot_name} must be required for canonical records")
 
-    require("funding_gap" in canonical and canonical["funding_gap"].required, "funding_gap must be required for canonical records")
+    require("funding_gap" in canonical and not canonical["funding_gap"].required, "funding_gap must be optional for early-stage canonical records")
     require(submission["funding_gap"].range == "integer", "submitted funding_gap must retain its integer range")
     require("funding_gap" not in public, "funding_gap must not be public")
     require("record_status" in canonical and canonical["record_status"].required, "record_status must be required for canonical records")

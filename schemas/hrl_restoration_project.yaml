@@ -172,13 +172,13 @@ classes:
       - record_status
       - update_date
     # These required flags are canonical-record-specific. funding_gap is a
-    # derived field available after canonical transformation and is required
-    # even when a legacy submitted value had to be passed through.
+    # derived field populated after canonical transformation when both funding
+    # inputs are available; early-stage records may legitimately omit it.
     slot_usage:
       project_id:
         required: true
       funding_gap:
-        required: true
+        required: false
       source_organization_code:
         required: true
       last_submission_id:
@@ -460,7 +460,8 @@ slots:
     description: >-
       Calculated canonical gap between estimated total budget and funding
       secured; a numeric legacy submission value may be supplied when the
-      source budget fields are insufficient to calculate it.
+      source budget fields are insufficient to calculate it. It is absent when
+      the source financial inputs are not yet available.
     range: integer
     comments:
       - >-

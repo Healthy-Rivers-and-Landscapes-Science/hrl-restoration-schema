@@ -6,7 +6,7 @@ be enforced by validation or ingestion code.
 | Rule | Likely enforcement location | Error/warning/derived value | Notes |
 | --- | --- | --- | --- |
 | Construction completion year should not be earlier than construction start year | Validation code | Error | Applies when both years are present |
-| Funding gap is calculated from estimated budget and secured funding | Canonical transformation | Derived value | `funding_gap` is canonical-only; legacy submitted values are discrepancies |
+| Funding gap is calculated from estimated budget and secured funding | Canonical transformation | Derived value | `funding_gap` is canonical-only and populated when both inputs are known; legacy submitted values are discrepancies |
 | Submitted [`project_id`](reference/project_id.md) must exist in the DWR-managed registry | Pipeline validation | Error | The schema requires a stable string ID but does not own registry access or assignment |
 | Missing contact name or email | Pipeline validation | Warning | Prominent warning, not a LinkML required field |
 | Budget and secured funding by stage | Pipeline validation | Warning or error | Warnings for concept/feasibility through design; errors for construction and post-construction monitoring and science |
