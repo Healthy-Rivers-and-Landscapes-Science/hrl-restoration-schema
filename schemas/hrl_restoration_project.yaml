@@ -7,7 +7,7 @@
 # what data type each field uses, and which controlled vocabulary values are
 # allowed.
 
-id: https://lucy-dwr.github.io/hrl-restoration-schema/
+id: https://healthy-rivers-and-landscapes-science.github.io/hrl-restoration-schema/
 name: hrl_restoration_schema
 title: HRL Restoration Spatial Data Schema
 description: Schema for HRL restoration spatial data submissions.
@@ -19,7 +19,7 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 # full URL everywhere.
 prefixes:
   linkml: https://w3id.org/linkml/
-  hrl: https://lucy-dwr.github.io/hrl-restoration-schema/
+  hrl: https://healthy-rivers-and-landscapes-science.github.io/hrl-restoration-schema/
 
 default_prefix: hrl
 default_range: string

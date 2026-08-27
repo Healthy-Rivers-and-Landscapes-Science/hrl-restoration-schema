@@ -1,6 +1,6 @@
 site_name: HRL Restoration Schema
-site_url: https://lucy-dwr.github.io/hrl-restoration-schema/
-repo_url: https://github.com/lucy-dwr/hrl-restoration-schema
+site_url: https://healthy-rivers-and-landscapes-science.github.io/hrl-restoration-schema/
+repo_url: https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-restoration-schema
 
 nav:
   - Home: index.md

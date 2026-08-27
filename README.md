@@ -10,9 +10,9 @@ that LinkML schema rather than edited directly.
 
 ## Schema docs site
 
-To view the schema docs site, visit https://lucy-dwr.github.io/hrl-restoration-schema/.
+To view the schema docs site, visit https://healthy-rivers-and-landscapes-science.github.io/hrl-restoration-schema/.
 
-To see the GitHub repository that hosts the schema, visit https://github.com/lucy-dwr/hrl-restoration-schema.
+To see the GitHub repository that hosts the schema, visit https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-restoration-schema.
 
 ## What this repository contains
 
@@ -62,7 +62,7 @@ If the schema needs to be updated, the process is:
 
 The schema namespace currently uses a GitHub Pages URL:
 
-`https://lucy-dwr.github.io/hrl-restoration-schema/`
+`https://healthy-rivers-and-landscapes-science.github.io/hrl-restoration-schema/`
 
 The project may later migrate to a persistent identifier such as `w3id.org`,
 but it does not use that namespace yet.

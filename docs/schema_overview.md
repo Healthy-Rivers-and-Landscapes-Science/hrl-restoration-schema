@@ -1,7 +1,7 @@
 # Schema Overview
 
 This repository uses [LinkML](https://linkml.io) as the source-of-truth schema language. The
-maintained schema is [`schemas/hrl_restoration_project.yaml`](https://github.com/lucy-dwr/hrl-restoration-schema/blob/main/schemas/hrl_restoration_project.yaml).
+maintained schema is [`schemas/hrl_restoration_project.yaml`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-restoration-schema/blob/main/schemas/hrl_restoration_project.yaml).
 
 The schema has three record profiles:
 
