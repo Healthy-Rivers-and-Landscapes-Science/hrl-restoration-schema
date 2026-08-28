@@ -1,17 +1,20 @@
 # Submission Guidance
 
-Submitted spatial files are expected to include required project attributes and
-valid spatial geometry. Submit them through the HRL Azure Portal workflow in a
-directory containing a `submission.json` manifest, one supported spatial file,
-and a `_READY` marker uploaded last.
+Data providers prepare one GeoPackage (or GeoJSON, or a zipped shapefile
+package) with the required project attributes and valid spatial geometry, using
+the HRL data-model spreadsheet, and email it to HRL. Providers do not need
+Azure, Git, or a submission website: the HRL data operator creates the Azure
+submission package (`submission.json` manifest, the spatial file, and a
+`_READY` marker uploaded last) and runs validation.
 
 Submitting entities should provide the fields defined by
 [`RestorationProjectSubmission`](reference/RestorationProjectSubmission.md).
 Every submitted feature must include its program-assigned
 [`project_id`](reference/project_id.md). It is a stable string identifier; do
-not invent, reuse, or alter it. The pipeline rejects IDs that are absent from
-the DWR-managed project-ID registry. System-assigned canonical fields, such as
-[`update_date`](reference/update_date.md), must not be supplied by submitters.
+not invent, reuse, or alter it. Validation rejects IDs that are absent from
+`project-id-registry.csv` in `hrl-project-registry`. System-assigned canonical
+fields, such as [`update_date`](reference/update_date.md), must not be supplied
+by submitters.
 
 Controlled vocabulary values must match the values defined in the schema enums.
 The validation layer may normalize file formats and report clear errors when a

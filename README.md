@@ -8,6 +8,9 @@ The maintained source of truth is
 `schemas/hrl_restoration_project.yaml`. Generated files should be derived from
 that LinkML schema rather than edited directly.
 
+Cross-repository workflow reference:
+[`hrl-azure-infrastructure/PIPELINE_INFRA.md`](https://github.com/lucy-dwr/hrl-azure-infrastructure/blob/main/PIPELINE_INFRA.md).
+
 ## Schema docs site
 
 To view the schema docs site, visit https://healthy-rivers-and-landscapes-science.github.io/hrl-restoration-schema/.
@@ -33,10 +36,10 @@ To see the GitHub repository that hosts the schema, visit https://github.com/Hea
 `RestorationProjectSubmission` describes fields expected from submitting
 entities. The HRL program assigns the stable string `project_id` before
 submission, and submitters must include that assigned ID on every submitted
-record. The pipeline validates the ID against the DWR-managed project-ID
-registry and never creates project IDs automatically. Submission-manifest
-metadata and other system-assigned canonical fields do not belong in submitted
-records.
+record. The pipeline validates the ID against `project-id-registry.csv` in
+[`hrl-project-registry`](https://github.com/lucy-dwr/hrl-project-registry) and
+never creates project IDs automatically. Submission-manifest metadata and other
+system-assigned canonical fields do not belong in submitted records.
 
 `RestorationProjectCanonicalRecord` describes standardized records stored after
 validation and ingestion. This profile includes program-assigned, derived, and
@@ -88,6 +91,15 @@ mkdocs serve
 
 The generated `docs/reference/` directory and `docs/data_dictionary.md` file are
 build artifacts and should not be hand-edited.
+
+## Provider data-model spreadsheet
+
+External data providers do not use Azure, Git, or a submission website. They
+prepare a conforming GeoPackage and email it to HRL. The fill-in spreadsheet
+they work from (field names, types, requiredness, and controlled-vocabulary
+values for `RestorationProjectSubmission`) is a view of this schema: keep it in
+sync with `docs/data_dictionary.md`, which is regenerated from the LinkML
+source. Do not maintain an independent field list.
 
 ## Release and schema sync
 
