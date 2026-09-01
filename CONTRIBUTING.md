@@ -8,12 +8,12 @@ workflow and who decides a change is warranted, see
 ## Ground rules
 
 - Edit the LinkML source, `schemas/hrl_restoration_project.yaml`. **Never edit
-  generated files** &mdash; everything in `docs/reference/`, `docs/data_dictionary.md`,
+  generated files** - everything in `docs/reference/`, `docs/data_dictionary.md`,
   and `generated/` is derived from the source.
 - Keep changes small and reviewable. Treat a controlled-vocabulary change as a
   schema change.
 - Update documentation when the meaning of a field changes; add or update
-  `examples/` fixtures when validation behaviour changes.
+  `examples/` fixtures when validation behavior changes.
 - Do not add validation code, infrastructure, database migrations, API code, or
   map application code to this repository.
 - American spellings.
@@ -47,7 +47,7 @@ Preview locally with `mkdocs serve`.
 
 ## Cutting a release
 
-Downstream repositories pin an **immutable, tagged** schema release &mdash; never
+Downstream repositories pin an **immutable, tagged** schema release - never
 `main`. The order matters: release here first, let the pipeline adopt it, and
 only then let any producer send data shaped for the new rules
 ([`PIPELINE_INFRA.md` &rarr; "Cross-repository change discipline"](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-azure-infrastructure/blob/main/PIPELINE_INFRA.md#cross-repository-change-discipline)).
@@ -55,13 +55,13 @@ only then let any producer send data shaped for the new rules
 1. **Land the schema change** on `main` via a reviewed PR, with `docs/reference/`,
    `docs/data_dictionary.md`, and the `examples/` fixtures regenerated/updated in
    the same PR. CI (lint, contract check, fixtures, MkDocs `--strict`) must pass.
-2. **Update `CHANGELOG.md`** &mdash; move `[Unreleased]` items under a new
+2. **Update `CHANGELOG.md`** - move `[Unreleased]` items under a new
    `[vX.Y.Z] - YYYY-MM-DD` heading.
 3. **Write a migration note** in `README.md`, next to the existing `v1.2.0` /
    `v1.3.0` / `v1.3.1` notes: what changed in the contract, and what each
    downstream consumer must do (or that it is unaffected).
 4. **Tag an annotated release.** `git tag -a vX.Y.Z -m "vX.Y.Z"` and push it, then
-   create the GitHub release. The tag must be annotated &mdash; the pipeline's
+   create the GitHub release. The tag must be annotated - the pipeline's
    `import_schema_snapshot.py` resolves it with `git ls-remote --tags ... ^{}`
    and refuses a lightweight tag.
 5. **Publishing the release fires two workflows:**
