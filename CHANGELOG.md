@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.3.1] - 2026-08-27
+
+### Changed
+
+- A `RestorationProjectCanonicalRecord` may omit `funding_gap` when the
+  underlying financial inputs (`estimated_budget`, `funding_secured`) are
+  unavailable and no legacy value was supplied. Public records are unaffected;
+  `funding_gap` remains non-public. This is the schema snapshot the data
+  pipeline currently pins.
+
 ## [v1.3.0] - 2026-08-27
 
 ### Added

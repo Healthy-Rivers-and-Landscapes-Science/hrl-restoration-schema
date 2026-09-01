@@ -63,13 +63,13 @@ jobs:
           branch: ${{ steps.branch.outputs.name }}
           base: main
           title: "Update HRL restoration project schema from ${{ github.event.release.tag_name }}"
-          commit-message: "Sync HRL restoration project schema from lucy-dwr/hrl-restoration-schema ${{ github.event.release.tag_name }}"
+          commit-message: "Sync HRL restoration project schema from Healthy-Rivers-and-Landscapes-Science/hrl-restoration-schema ${{ github.event.release.tag_name }}"
           body: |
             ## Schema sync from release `${{ github.event.release.tag_name }}`
 
             | Field | Value |
             |---|---|
-            | Source repository | `lucy-dwr/hrl-restoration-schema` |
+            | Source repository | `Healthy-Rivers-and-Landscapes-Science/hrl-restoration-schema` |
             | Source file | `schemas/hrl_restoration_project.yaml` |
             | Release tag | `${{ github.event.release.tag_name }}` |
             | Target repository | `lucy-dwr/dwr-restoration-spatial-data` |

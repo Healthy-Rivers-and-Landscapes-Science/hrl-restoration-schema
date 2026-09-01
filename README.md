@@ -9,7 +9,10 @@ The maintained source of truth is
 that LinkML schema rather than edited directly.
 
 Cross-repository workflow reference:
-[`hrl-azure-infrastructure/PIPELINE_INFRA.md`](https://github.com/lucy-dwr/hrl-azure-infrastructure/blob/main/PIPELINE_INFRA.md).
+[`hrl-azure-infrastructure/PIPELINE_INFRA.md`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-azure-infrastructure/blob/main/PIPELINE_INFRA.md).
+Roles and ownership:
+[`hrl-azure-infrastructure/DIVISION_OF_RESPONSIBILITIES.md`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-azure-infrastructure/blob/main/DIVISION_OF_RESPONSIBILITIES.md).
+How to cut a release: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Schema docs site
 
@@ -37,7 +40,7 @@ To see the GitHub repository that hosts the schema, visit https://github.com/Hea
 entities. The HRL program assigns the stable string `project_id` before
 submission, and submitters must include that assigned ID on every submitted
 record. The pipeline validates the ID against `project-id-registry.csv` in
-[`hrl-project-registry`](https://github.com/lucy-dwr/hrl-project-registry) and
+[`hrl-project-registry`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-project-registry) and
 never creates project IDs automatically. Submission-manifest metadata and other
 system-assigned canonical fields do not belong in submitted records.
 
@@ -52,14 +55,18 @@ fields.
 
 ## Intended workflow
 
-If the schema needs to be updated, the process is:
+If the schema needs to be updated, the outline is:
 
 1. Edit the LinkML schema
 2. Lint and validate the schema
 3. Regenerate generated artifacts
 4. Validate examples
 5. Open a pull request
-6. Tag a new release
+6. Tag a new release, update the changelog, and write a migration note
+7. Let the downstream pin catch up (the data pipeline imports the new snapshot)
+
+The full step-by-step, including the downstream coordination, is in
+[`CONTRIBUTING.md` &rarr; "Cutting a release"](CONTRIBUTING.md#cutting-a-release).
 
 ## Namespace
 
@@ -121,10 +128,18 @@ with Contents (read and write) and Pull requests (read and write) permissions.
 excluding it from public records. The data pipeline must import the immutable
 schema snapshot, recalculate the canonical value from
 `estimated_budget - funding_secured` when possible, and issue the documented
-warnings for differing or pass-through legacy values. `v1.3.1` also permits a
-canonical record to omit `funding_gap` while the underlying financial inputs
-are unavailable. No change is expected in `hrl-restoration-map` because
-`funding_gap` remains non-public.
+warnings for differing or pass-through legacy values. No change is expected in
+`hrl-restoration-map` because `funding_gap` remains non-public. (See the v1.3.1
+note below for the later relaxation of the canonical requirement.)
+
+### v1.3.1 migration note
+
+`v1.3.1` lets a `RestorationProjectCanonicalRecord` omit `funding_gap` when
+`estimated_budget` and `funding_secured` are both unavailable and no legacy
+value was supplied. The data pipeline imports the immutable `v1.3.1` snapshot
+and no longer treats an absent canonical `funding_gap` as an error in that case.
+`funding_gap` stays non-public, so `hrl-restoration-map` is unaffected. This is
+the snapshot the pipeline currently pins.
 
 ### v1.3.0 migration note
 
@@ -141,4 +156,7 @@ adopting these contract changes.
 
 ## Status
 
-This is an initial draft schema repository.
+In production use. The current release is **v1.3.1**, which the
+`hrl-restoration-data-pipeline` pins by immutable commit and checksum and
+validates every restoration submission against. Changes are made through pull
+requests and tagged releases; see [`CONTRIBUTING.md`](CONTRIBUTING.md).

@@ -1,39 +1,48 @@
-# Validation Interface
+# Validation interface
 
-A future validation repository should consume generated artifacts from this
-schema repository rather than duplicating schema logic.
+The validation implementation is
+[`hrl-restoration-data-pipeline`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-restoration-data-pipeline).
+It consumes this repository's released artifacts; it does not duplicate schema
+logic. This page describes the boundary between the two.
 
-Expected generated artifacts include:
+## What the pipeline consumes from here
 
-- JSON Schema for submission records
-- JSON Schema for canonical records
-- JSON Schema for public export records
-- Controlled vocabulary JSON/CSV
-- Human-readable data dictionary
+The pipeline pins one **immutable, tagged** release of
+`schemas/hrl_restoration_project.yaml` (currently `v1.3.1`), stored by commit and
+checksum. From it, using `linkml-runtime`, it derives:
 
-Validation code should own:
+- the induced slots and requiredness of each profile
+  (`RestorationProjectSubmission`, `RestorationProjectCanonicalRecord`,
+  `RestorationProjectPublicRecord`);
+- the controlled-vocabulary (enum) values;
+- the multivalued slots;
+- the lead-entity catalog (full names, abbreviations, aliases).
 
-- Reading GeoPackage and zipped shapefile inputs
-- Extracting attributes
-- Validating attributes against generated schema artifacts
-- Validating geometry with geospatial libraries
-- Producing validation reports
-- Writing standardized outputs
-- Applying conditional business rules, project-ID registry checks, and
-  conservative deterministic repairs
-- Creating JSON and HTML validation reports and stopping successful records at
-  an approval candidate until a program lead supplies an `_APPROVE` marker
+It never follows `main`. Adopting a new release is an explicit, reviewed step
+(see [`CONTRIBUTING.md` &rarr; "Cutting a release"](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-restoration-schema/blob/main/CONTRIBUTING.md#cutting-a-release)).
 
-Proposed validation report fields:
+## What the pipeline owns, not this repository
 
-| Field | Description |
-| --- | --- |
-| `file_name` | Name of the submitted file |
-| `schema_version` | Schema version or release used for validation |
-| `validation_timestamp` | Timestamp when validation ran |
-| `severity` | Error, warning, or info |
-| `check_category` | Attribute, vocabulary, geometry, business rule, or system check |
-| `feature_identifier` | Feature identifier or row number |
-| `field_name` | Field associated with the finding, if applicable |
-| `message` | Human-readable validation message |
-| `suggested_fix` | Suggested correction, when available |
+- Reading GeoPackage, GeoJSON, and zipped-shapefile inputs, and archive safety.
+- Coordinate reference systems: reprojecting inputs to the working CRS,
+  requiring an input CRS, range-checking geometry, and reprojecting the public
+  GeoJSON to WGS84 lon/lat.
+- Geometry validity checks with geospatial libraries.
+- Conditional business rules that LinkML intentionally does not express
+  (stage-dependent requiredness, acreage thresholds, funding-gap
+  reconciliation) &mdash; documented in [`business_rules.md`](business_rules.md).
+- The project-ID registry check against
+  [`hrl-project-registry`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-project-registry).
+- Conservative, deterministic repairs, recorded in the report.
+- Producing the validation report and the standardized outputs, and holding a
+  passing submission at an approval candidate until an `_APPROVE` marker is
+  supplied.
+
+## Validation report
+
+The pipeline writes `validation-report.json` (authoritative),
+`validation-report.html`, and, on request, `validation-report.pdf` (the standard
+human-readable and provider-facing copy). Each finding carries a stage, a
+severity (error / warning), a rule identifier, a human-readable message, and,
+where applicable, the record identifier. The report records the schema version,
+the registry commit, and the pipeline version for reproducibility.
