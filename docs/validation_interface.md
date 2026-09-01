@@ -30,7 +30,7 @@ It never follows `main`. Adopting a new release is an explicit, reviewed step
 - Geometry validity checks with geospatial libraries.
 - Conditional business rules that LinkML intentionally does not express
   (stage-dependent requiredness, acreage thresholds, funding-gap
-  reconciliation) &mdash; documented in [`business_rules.md`](business_rules.md).
+  reconciliation) - documented in [`business_rules.md`](business_rules.md).
 - The project-ID registry check against
   [`hrl-project-registry`](https://github.com/Healthy-Rivers-and-Landscapes-Science/hrl-project-registry).
 - Conservative, deterministic repairs, recorded in the report.
